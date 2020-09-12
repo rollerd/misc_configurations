@@ -2,7 +2,7 @@ let mapleader = "\<Space>"
 "nnoremap <Leader>e :tabe ./
 "nnoremap <Leader>n :tabn<CR>
 "nnoremap <Leader>p :tabp<CR>
-nnoremap <Leader>e :enew<CR>
+"nnoremap <Leader>e :enew<CR>
 nnoremap <Leader>n :bnext<CR>
 nnoremap <Leader>p :bprevious<CR>
 nnoremap <Leader>bq :bp <BAR> bd #<CR>
@@ -14,11 +14,19 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 " Set 's' to insert single char and then go back to visual mode
 nnoremap s :exec "normal i".nr2char(getchar())."\e"<CR>
+" Open filename in new buffer w/ autocomplete
+function FileInBuffer()
+    execute ':enew'
+    execute ':e' input("Filename: ", "", "file")
+endfunction
+nnoremap <Leader>e :call FileInBuffer()<CR>
+
 
 set hidden
 set splitright
 
 command Nonum set nonumber | set norelativenumber
+cnoreabbrev nonum Nonum
 
 syntax on
 autocmd BufNewFile,BufRead Jenkinsfile setlocal shiftwidth=2 softtabstop=2
@@ -110,23 +118,28 @@ autocmd FileType yaml let b:did_indent = 1
 set backspace=indent,eol,start
 
 call plug#begin('~/.vim/plugged')
-"NerdTree
+"#NerdTree
 "Plug 'scrooloose/nerdtree'
 "Plug 'powerline/powerline'
 Plug 'bling/vim-airline'
-"Fugitive git
+"#Fugitive git
 Plug 'tpope/vim-fugitive'
-"Terraform plugin
+"#Terraform plugin
 Plug 'hashivim/vim-terraform'
-"Jenkinsfile_vim
+"#Jenkinsfile_vim
 Plug 'martinda/jenkinsfile-vim-syntax'
-"Command-t
+"#Command-t
 Plug 'wincent/command-t'
+"# To update ruby version, you will need to export the correct ruby version to
+"# PATH, comment the line above, run PlugClean. uncomment the lines below run
+"# PlugInstall
 "Plug 'wincent/command-t', {
 "  \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
 "  \ }
-"vim-go
+"#vim-go
 Plug 'fatih/vim-go'
+"#vim-helm
+Plug 'towolf/vim-helm'
 call plug#end()
 
 
