@@ -1,3 +1,10 @@
+"# Only used if referencing ~/.vimrc
+"set runtimepath^=~/.vim runtimepath+=~/.vim/after
+"let &packpath=&runtimepath
+"source ~/.vimrc
+
+set termguicolors
+
 let mapleader = "\<Space>"
 "nnoremap <Leader>e :tabe ./
 "nnoremap <Leader>n :tabn<CR>
@@ -13,7 +20,7 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 " Set 's' to insert single char and then go back to visual mode
-nnoremap s :exec "normal i".nr2char(getchar())."\e"<CR>
+nnoremap t :exec "normal i".nr2char(getchar())."\e"<CR>
 " Open filename in new buffer w/ autocomplete
 function FileInBuffer()
     execute ':enew'
@@ -21,7 +28,8 @@ function FileInBuffer()
 endfunction
 nnoremap <Leader>e :call FileInBuffer()<CR>
 
-
+" Disable cursor shape change on insert mode
+set guicursor=
 set hidden
 set splitright
 
@@ -79,7 +87,7 @@ let g:terraform_align=1
 
 " ------ VISUAL--------
 set background=dark
-colorscheme molokai-trans
+colorscheme custom-molokai
 " colorscheme badwolf
 " colorscheme blackboard
 " colorscheme solarized
@@ -117,7 +125,7 @@ autocmd FileType yaml let b:did_indent = 1
 " Vim will prevent deletion of certain chars without this set
 set backspace=indent,eol,start
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 "#NerdTree
 "Plug 'scrooloose/nerdtree'
 "Plug 'powerline/powerline'
@@ -128,19 +136,23 @@ Plug 'tpope/vim-fugitive'
 Plug 'hashivim/vim-terraform'
 "#Jenkinsfile_vim
 Plug 'martinda/jenkinsfile-vim-syntax'
-"#Command-t
-Plug 'wincent/command-t'
-"# To update ruby version, you will need to export the correct ruby version to
-"# PATH, comment the line above, run PlugClean. uncomment the lines below run
-"# PlugInstall
-"Plug 'wincent/command-t', {
-"  \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
-"  \ }
+"#Ctrl-P plugin
+Plug 'ctrlpvim/ctrlp.vim'
 "#vim-go
 Plug 'fatih/vim-go'
+"#repeat.vim (leap dependency)
+Plug 'tpope/vim-repeat'
+"#leap-nvim
+Plug 'ggandor/leap.nvim'
 "#vim-helm
 Plug 'towolf/vim-helm'
 call plug#end()
 
 
 "highlight CursorLine ctermbg=18
+
+lua require('leap').add_default_mappings()
+lua require('leap').opts.case_sensitive = true
+lua require('leap').highlight_unlabeled = true
+
+"lua vim.api.nvim_set_hl(0, 'LeapMatch', { fg = 'green' })
