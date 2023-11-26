@@ -1,0 +1,12 @@
+## Example ssh using bastions keys
+#Host 10.60.*
+#    User ec2-user
+#    StrictHostKeyChecking no
+#    ProxyCommand ssh -T -o 'ForwardAgent yes' <PROD BASTION> 'ssh-add -t 10 /home/ec2-user/.ssh/<REMOTE>.pem && nc %h %p'
+
+Host github.com
+    IdentityFile ~/.ssh/github/id_ed25519
+
+Host 192.168.*
+    User $USER
+    IdentityFile ~/.ssh/local/id_ed25519
