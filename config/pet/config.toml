@@ -8,7 +8,7 @@
 
 [Gist]
   file_name = "pet-snippet.toml"
-  access_token = ""
+  access_token = <REPLACE WITH GITHUB PAT>
   gist_id = ""
   public = false
   auto_sync = false
