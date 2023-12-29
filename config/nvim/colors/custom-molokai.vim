@@ -43,7 +43,7 @@ hi DiffDelete      guifg=#960050 guibg=#1E0010
 hi DiffText                      guibg=#4C4745 gui=italic,bold
 
 hi Directory       guifg=#87FF00               gui=bold
-hi Error           guifg=#0000FF guibg=#0000FF
+hi Error           guifg=#A29CA3 guibg=#C91B78
 hi ErrorMsg        guifg=#FF00AF guibg=#000000 gui=bold
 hi Exception       guifg=#87FF00               gui=bold
 hi Float           guifg=#AF5FFF
